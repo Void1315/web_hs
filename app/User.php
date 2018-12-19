@@ -2,18 +2,14 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
 class User extends Authenticatable
 {
+    //
     use Notifiable;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name', 'email', 'password',
     ];
@@ -26,4 +22,18 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+	public function addUser($name,$email,$password)
+	{
+		$this->name = $name;
+		$this->email = $email;
+		$this->password = Hash::make($password);
+		$this->save();
+		return $this->id;
+	}
+
+	public function image()
+    {
+        return $this->hasOne('App\Image','id','img_id');
+    }
+
 }

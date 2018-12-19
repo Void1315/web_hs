@@ -10,13 +10,16 @@ require('./bootstrap');
 window.Vue = require('vue');
 import VueRouter from 'vue-router'
 import ElementUI from 'element-ui';
+import axios from 'axios';
 import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.use(VueRouter)
 Vue.use(ElementUI);
-
+Vue.prototype.$axios = axios;
 import Index from './components/Example.vue'
 import Frame from './components/Frame.vue'
+import User from './components/User.vue'
+import CardFrom from './components/CardFrom.vue'
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -29,14 +32,26 @@ const router = new VueRouter({
     	children:[
 	    	{
 	    		path: '',
-          		component: Index
+      		component: Index
 	    	},
+        {
+          path:'/user',
+          component: User
+        },
+        {
+          path:'/card',
+          component : CardFrom
+        }
     	] 
     }
   ]
 })
+let token = document.head.querySelector('meta[name="csrf-token"]');
 
-
+if (token) {
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+}
+Vue.prototype.$token = token.content;
 const app = new Vue({
     el: '#app',
     router

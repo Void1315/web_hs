@@ -1,48 +1,60 @@
 <template>
-    <el-container>
-      <el-aside width="200px">
-          <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
-              <el-radio-button :label="false">展开</el-radio-button>
-              <el-radio-button :label="true">收起</el-radio-button>
-        </el-radio-group>
-        <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
-              <el-submenu index="1">
-                <template slot="title">
-                  <i class="el-icon-location"></i>
-                  <span slot="title">导航一</span>
-                </template>
-                <el-menu-item-group>
-                  <span slot="title">分组一</span>
-                  <el-menu-item index="1-1">选项1</el-menu-item>
-                  <el-menu-item index="1-2">选项2</el-menu-item>
-                </el-menu-item-group>
-                <el-menu-item-group title="分组2">
-                  <el-menu-item index="1-3">选项3</el-menu-item>
-                </el-menu-item-group>
-                <el-submenu index="1-4">
-                  <span slot="title">选项4</span>
-                  <el-menu-item index="1-4-1">选项1</el-menu-item>
-                </el-submenu>
-              </el-submenu>
-              <el-menu-item index="2">
-                <i class="el-icon-menu"></i>
-                <span slot="title">导航二</span>
-              </el-menu-item>
-              <el-menu-item index="3" disabled>
-                <i class="el-icon-document"></i>
-                <span slot="title">导航三</span>
-              </el-menu-item>
-              <el-menu-item index="4">
-                <i class="el-icon-setting"></i>
-                <span slot="title">导航四</span>
-              </el-menu-item>
-        </el-menu>
+    <el-container class="max-height">
+      <el-header class="my-head-box">
+        <el-row type="flex" class="max-height" justify="space-between">
+            <el-col class="head-logo-box max-height">
+                <div class="max-height"></div>
+            </el-col>
+            <el-col :span="2">
+                <el-row class="max-height" type="flex" justify="center" align="middle">
+                  <el-dropdown class="max-height">
+                    <div class="max-height">
+                      <div class="head-user-box max-height">
+                        <a href="####">
+                          <img v-bind:src="userImgPath" class="head-user-img el-dropdown-link ">
+                        </a>
+                      </div>
+                    </div>
+                    <el-dropdown-menu slot="dropdown">
+                      <a href="#/user"><el-dropdown-item>个人中心</el-dropdown-item></a>
+                      <el-dropdown-item>退出登录</el-dropdown-item>
+                    </el-dropdown-menu>
+                  </el-dropdown>
+                </el-row>
+            </el-col>
+        </el-row>
+      </el-header>
 
-      </el-aside>
-      <el-container>
-        <el-header>Header</el-header>
+      <el-container class="max-height">
+        <el-aside class="max-height my-aside">
+          <el-row class="tac max-height">
+              <el-col :span="24" class="max-height">
+                <el-menu
+                  default-active="1"
+                  class="max-height"
+                  :router="true"
+                  @open="handleOpen"
+                  @close="handleClose">
+                  <el-menu-item index="/card">
+                    <i class="el-icon-menu"></i>
+                    <span slot="title">卡牌大全</span>
+                  </el-menu-item>
+                  <el-menu-item index="2">
+                    <i class="el-icon-document"></i>
+                    <span slot="title">我的套牌</span>
+                  </el-menu-item>
+                  <el-menu-item index="3">
+                    <i class="el-icon-setting"></i>
+                    <span slot="title">关于</span>
+                  </el-menu-item>
+                </el-menu>
+              </el-col>
+          </el-row>
+        </el-aside>
         <el-main>
-            <router-view></router-view>
+            <el-card class="box-card">
+                <router-view v-on:listenTo="changImg"></router-view>
+            </el-card>
         </el-main>
       </el-container>
     </el-container>
@@ -51,11 +63,12 @@
     export default {
         data() {
           return {
-            isCollapse: true
+            isCollapse: true,
+            userImgPath: "",
           };
         },
         mounted() {
-            
+            this.getUserImg();
         },
         methods: {
           handleOpen(key, keyPath) {
@@ -63,13 +76,62 @@
           },
           handleClose(key, keyPath) {
             console.log(key, keyPath);
+          },
+          getUserImg(){
+            this.$axios.get('/userImg').then((response) => {
+              this.userImgPath = response.data
+            }).catch(function(error){
+              console.log(error);
+            })
+          },
+          changImg(imgPath){
+            this.userImgPath = imgPath
           }
         }
     }
 </script>
 <style lang="scss" scoped="" type="text/css">
-    .el-menu-vertical-demo:not(.el-menu--collapse) {
-        width: 200px;
-        min-height: 400px;
+a{
+  text-decoration:none;
+}
+$shadow-color:rgba(26, 26, 26, 0.1);
+$aside-width:200px;
+.max-height{
+    height:100%;
+}
+.max-width{
+  width: 100%;
+}
+.congested{
+  @extend .max-height;
+  @extend .max-width;
+}
+.my-aside{
+    width: $aside-width !important;
+}
+.my-head-box{
+    box-shadow: 0 1px 3px $shadow-color;
+    margin-bottom: 10px;
+    background-color: white;
+    padding: 0;
+
+    .head-logo-box{
+        width: $aside-width;
+
     }
+    .head-user-box{
+        padding: 5px;
+        background-color: white;
+        box-sizing: border-box;
+        border-style: solid;
+        border-color: $shadow-color;
+        height: 100%;
+        border-width: 1px;
+        border-radius: 4px;
+      .head-user-img{
+        width: auto;
+        height: 100%;
+      }
+    }
+}
 </style>
