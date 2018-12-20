@@ -80,8 +80,15 @@
           getUserImg(){
             this.$axios.get('/userImg').then((response) => {
               this.userImgPath = response.data
-            }).catch(function(error){
-              console.log(error);
+            }).catch((error)=>{
+              this.getDefaultImg()
+            })
+          },
+          getDefaultImg(){
+            this.$axios.get('/default/img').then((response) => {
+              this.userImgPath = response.data.path;
+            }).catch((error) =>{
+              this.$message.error("出错了!")
             })
           },
           changImg(imgPath){

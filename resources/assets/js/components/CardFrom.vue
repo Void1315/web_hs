@@ -2,7 +2,9 @@
 	<div class="container">
 		<el-row>
 			<el-col>
-				<el-select @change="selectClass" v-model="itemSelect" placeholder="请选择职业">
+				<el-select 
+				clearable @change="selectClass" 
+				v-model="itemSelect" placeholder="请选择职业">
 				    <el-option
 				      v-for="item in classItem"
 				      :key="item.id"
@@ -12,6 +14,7 @@
 				</el-select>
 				<div style="display: inline-block;">
 					<el-input
+						@blur="serach"
 						clearable
 					    placeholder="请输入内容"
 					    prefix-icon="el-icon-search"
@@ -74,7 +77,7 @@
 		    <el-table-column
 		      prop="attack"
 		      width="110"
-		      :formatter="formatter"
+		      :formatter="formatterAttack"
 		      align="center"
 		      sortable
 		      label="攻击力">
@@ -82,7 +85,7 @@
 		    <el-table-column
 		      prop="health"
 		      width="110"
-		      :formatter="formatter"
+		      :formatter="formatterHealth"
 		      align="center"
 		      sortable
 		      label="生命值">
@@ -131,8 +134,30 @@ export default {
     	this.getClass();
     },
     methods:{
+
+    	serach(event){
+    		this.$axios.post('/serach',{
+    			serach:	this.serachText,
+    			page_sizes:this.pagetotal,
+    			page:this.page,
+    		}).then((respose) => {
+    			this.tableData = respose.data.data
+    			this.total = respose.data.total;
+    			this.pageSize = respose.data.last_page;
+    			console.log(respose)
+    		}).catch((error)=>{
+
+    		})
+    	},
+
     	selectClass(value){
-    		this.getClassPage()
+    		if(value)
+    			this.getClassPage()
+    		else
+    		{
+    			this.getPageInfo();
+    			this.getPage();
+    		}
     	},
     	getClassPage(){
     		this.$axios.get('/card',{
@@ -206,23 +231,39 @@ export default {
     	},
     	handleSizeChange(val){
     		this.pagetotal = val
-    		if(!this.itemSelect)
+    		if(this.serachText)
+    			this.serach();
+    		else if(!this.itemSelect)
     			this.getPage();
     		else
     			this.getClassPage();
     	},
     	handleCurrentChange(val){
 			this.page = val;
-			if(!this.itemSelect)
+			if(this.serachText)
+    			this.serach();
+			else if(!this.itemSelect)
     			this.getPage();
     		else
     			this.getClassPage();
     	},
-    	formatter(row, column){
+    	formatterAttack(row, column){
     		if(row.cardtype!='随从'){
     			return "无";
     		}
+    		else{
+    			return row.attack
+    		}
     	},
+    	formatterHealth(row, column){
+    		if(row.cardtype!='随从'){
+    			return "无";
+    		}
+    		else{
+    			return row.health
+    		}
+    	},
+
 
     }
 }

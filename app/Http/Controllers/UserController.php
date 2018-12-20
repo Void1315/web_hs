@@ -26,7 +26,7 @@ class UserController extends Controller
 			return asset(substr($this->userModel->image->path,2));
 		}
 		else{
-			return "未登录";
+			return response('未登录', 422);
 		}
 	}
 
@@ -60,6 +60,11 @@ class UserController extends Controller
 	    	'state' => '200'
 		]);
 
+	}
+
+	public function defaultImg()
+	{
+		return $this->imageModel->find(1);
 	}
 
 

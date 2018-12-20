@@ -90,7 +90,7 @@ export default {
     			this.form.email = response.data[0].email
     			// console.log(response.data[0].name)
     		}).catch((error) => {
-
+    			console.log(1)
     		})
     	},
     	handleRemove(file, fileList) {

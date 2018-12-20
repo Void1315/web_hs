@@ -66,6 +66,16 @@ class CardControlle extends Controller
 	    return $paginator;
 	}
 
-
+	public  function serach(Request $request)
+	{
+		$data = $this->cardModel->where('name','like','%'.$request->serach.'%')->get();
+		$data = $data->each(function($item,$key){
+			$item->classes;
+			$item->races;
+			$item->expand;
+			$item->image;
+		});
+		return $this->pageSplit($request->page,$data->toArray(),$request->page_sizes);
+	}
 
 }
