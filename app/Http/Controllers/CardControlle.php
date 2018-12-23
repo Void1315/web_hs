@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Card;
+use Illuminate\Support\Facades\Auth;
 use App\TClass;
+use App\CardSet;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 class CardControlle extends Controller
@@ -12,10 +14,12 @@ class CardControlle extends Controller
     //
 	public $cardModel;
 	public $classModel;
+	public $cardSetModel;
 	function __construct()
 	{
 		$this->cardModel = new Card();
 		$this->classModel = new TClass();
+		$this->cardSetModel = new CardSet();
 	}
 
 	public function getCardPage(Request $request)//page_sizes是条数
@@ -45,9 +49,6 @@ class CardControlle extends Controller
 
 	public function getClass(Request $request)
 	{
-		// if($request->selectclass){
-		// 	return $this->pageSplit($request->page,$this->classModel->find($request->selectclass)->cards->toArray(),$request->page_sizes);
-		// }
 		return $this->classModel->all();
 	}
 
@@ -76,6 +77,40 @@ class CardControlle extends Controller
 			$item->image;
 		});
 		return $this->pageSplit($request->page,$data->toArray(),$request->page_sizes);
+	}
+
+	public function serachClassCard(Request $request)
+	{
+		$data = $this->classModel->where('id','=',$request->class_id)
+		->get();
+		$data = $data->each(function($item,$key){
+			$item->cards;
+		});
+		return $this->pageSplit($request->page,$data->get(0)->cards->toArray(),$request->page_sizes);
+		// return $this->pageSplit(0,$data->get(0)->cards->toArray(),20);
+		// return dd($data->get(0)->cards->toArray());
+		// return $data->collapse();
+	}
+
+	public function serachNeutralCard(Request $request)
+	{
+
+	}
+
+	public function serachId(Request $request)
+	{
+		$collection = collect();
+		return $this->cardModel->whereIn('id',$request->arr_id)->get();
+	}
+
+	public function saveSet(Request $request)
+	{
+		return $this->cardSetModel->saveOne($request->code,Auth::user()->id,$request->class_id,$request->name);
+	}
+
+	public function deleteSet(Request $request)
+	{
+		return $this->cardSetModel->deleteOne(Auth::user()->id,$request->set_id);
 	}
 
 }

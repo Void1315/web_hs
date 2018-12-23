@@ -77,7 +77,7 @@
 /* harmony export (immutable) */ __webpack_exports__["c"] = deepMerge;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(66);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof__);
 
 
@@ -11700,7 +11700,7 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14), __webpack_require__(103).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15), __webpack_require__(103).setImmediate))
 
 /***/ }),
 /* 4 */
@@ -12109,7 +12109,7 @@ exports.default = {
 /***/ (function(module, exports, __webpack_require__) {
 
 var dP = __webpack_require__(10);
-var createDesc = __webpack_require__(20);
+var createDesc = __webpack_require__(22);
 module.exports = __webpack_require__(11) ? function (object, key, value) {
   return dP.f(object, key, createDesc(1, value));
 } : function (object, key, value) {
@@ -12122,7 +12122,7 @@ module.exports = __webpack_require__(11) ? function (object, key, value) {
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var anObject = __webpack_require__(19);
+var anObject = __webpack_require__(21);
 var IE8_DOM_DEFINE = __webpack_require__(67);
 var toPrimitive = __webpack_require__(39);
 var dP = Object.defineProperty;
@@ -12145,7 +12145,7 @@ exports.f = __webpack_require__(11) ? Object.defineProperty : function definePro
 /***/ (function(module, exports, __webpack_require__) {
 
 // Thank's IE8 for his funny defineProperty
-module.exports = !__webpack_require__(17)(function () {
+module.exports = !__webpack_require__(18)(function () {
   return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
 });
 
@@ -12167,7 +12167,7 @@ module.exports = function (it) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var store = __webpack_require__(43)('wks');
-var uid = __webpack_require__(23);
+var uid = __webpack_require__(25);
 var Symbol = __webpack_require__(5).Symbol;
 var USE_SYMBOL = typeof Symbol == 'function';
 
@@ -12181,63 +12181,6 @@ $exports.store = store;
 
 /***/ }),
 /* 14 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports) {
-
-var core = module.exports = { version: '2.6.1' };
-if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
-
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports) {
-
-module.exports = function (it) {
-  return typeof it === 'object' ? it !== null : typeof it === 'function';
-};
-
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports) {
-
-module.exports = function (exec) {
-  try {
-    return !!exec();
-  } catch (e) {
-    return true;
-  }
-};
-
-
-/***/ }),
-/* 18 */
 /***/ (function(module, exports) {
 
 /*
@@ -12319,97 +12262,64 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 15 */
+/***/ (function(module, exports) {
 
-var isObject = __webpack_require__(16);
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports) {
+
+var core = module.exports = { version: '2.6.1' };
+if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
+
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports) {
+
 module.exports = function (it) {
-  if (!isObject(it)) throw TypeError(it + ' is not an object!');
-  return it;
+  return typeof it === 'object' ? it !== null : typeof it === 'function';
 };
 
 
 /***/ }),
-/* 20 */
+/* 18 */
 /***/ (function(module, exports) {
 
-module.exports = function (bitmap, value) {
-  return {
-    enumerable: !(bitmap & 1),
-    configurable: !(bitmap & 2),
-    writable: !(bitmap & 4),
-    value: value
-  };
+module.exports = function (exec) {
+  try {
+    return !!exec();
+  } catch (e) {
+    return true;
+  }
 };
 
 
 /***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.2.14 / 15.2.3.14 Object.keys(O)
-var $keys = __webpack_require__(69);
-var enumBugKeys = __webpack_require__(44);
-
-module.exports = Object.keys || function keys(O) {
-  return $keys(O, enumBugKeys);
-};
-
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports) {
-
-module.exports = true;
-
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports) {
-
-var id = 0;
-var px = Math.random();
-module.exports = function (key) {
-  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
-};
-
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports) {
-
-exports.f = {}.propertyIsEnumerable;
-
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-
-var _iterator = __webpack_require__(142);
-
-var _iterator2 = _interopRequireDefault(_iterator);
-
-var _symbol = __webpack_require__(154);
-
-var _symbol2 = _interopRequireDefault(_symbol);
-
-var _typeof = typeof _symbol2.default === "function" && typeof _iterator2.default === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default && obj !== _symbol2.default.prototype ? "symbol" : typeof obj; };
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = typeof _symbol2.default === "function" && _typeof(_iterator2.default) === "symbol" ? function (obj) {
-  return typeof obj === "undefined" ? "undefined" : _typeof(obj);
-} : function (obj) {
-  return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default && obj !== _symbol2.default.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
-};
-
-/***/ }),
-/* 26 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -12637,7 +12547,7 @@ function applyToTag (styleElement, obj) {
 
 
 /***/ }),
-/* 27 */
+/* 20 */
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -12744,6 +12654,96 @@ module.exports = function normalizeComponent (
   }
 }
 
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isObject = __webpack_require__(17);
+module.exports = function (it) {
+  if (!isObject(it)) throw TypeError(it + ' is not an object!');
+  return it;
+};
+
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports) {
+
+module.exports = function (bitmap, value) {
+  return {
+    enumerable: !(bitmap & 1),
+    configurable: !(bitmap & 2),
+    writable: !(bitmap & 4),
+    value: value
+  };
+};
+
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.2.14 / 15.2.3.14 Object.keys(O)
+var $keys = __webpack_require__(69);
+var enumBugKeys = __webpack_require__(44);
+
+module.exports = Object.keys || function keys(O) {
+  return $keys(O, enumBugKeys);
+};
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports) {
+
+module.exports = true;
+
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports) {
+
+var id = 0;
+var px = Math.random();
+module.exports = function (key) {
+  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
+};
+
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports) {
+
+exports.f = {}.propertyIsEnumerable;
+
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _iterator = __webpack_require__(142);
+
+var _iterator2 = _interopRequireDefault(_iterator);
+
+var _symbol = __webpack_require__(154);
+
+var _symbol2 = _interopRequireDefault(_symbol);
+
+var _typeof = typeof _symbol2.default === "function" && typeof _iterator2.default === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default && obj !== _symbol2.default.prototype ? "symbol" : typeof obj; };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = typeof _symbol2.default === "function" && _typeof(_iterator2.default) === "symbol" ? function (obj) {
+  return typeof obj === "undefined" ? "undefined" : _typeof(obj);
+} : function (obj) {
+  return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default && obj !== _symbol2.default.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
+};
 
 /***/ }),
 /* 28 */
@@ -14070,7 +14070,7 @@ exports.default = function (ref) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var global = __webpack_require__(5);
-var core = __webpack_require__(15);
+var core = __webpack_require__(16);
 var ctx = __webpack_require__(136);
 var hide = __webpack_require__(9);
 var has = __webpack_require__(7);
@@ -14138,7 +14138,7 @@ module.exports = $export;
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.1.1 ToPrimitive(input [, PreferredType])
-var isObject = __webpack_require__(16);
+var isObject = __webpack_require__(17);
 // instead of the ES6 spec version, we didn't implement @@toPrimitive case
 // and the second argument - flag - preferred type is a string
 module.exports = function (it, S) {
@@ -14179,7 +14179,7 @@ module.exports = function (it) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var shared = __webpack_require__(43)('keys');
-var uid = __webpack_require__(23);
+var uid = __webpack_require__(25);
 module.exports = function (key) {
   return shared[key] || (shared[key] = uid(key));
 };
@@ -14189,7 +14189,7 @@ module.exports = function (key) {
 /* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var core = __webpack_require__(15);
+var core = __webpack_require__(16);
 var global = __webpack_require__(5);
 var SHARED = '__core-js_shared__';
 var store = global[SHARED] || (global[SHARED] = {});
@@ -14198,7 +14198,7 @@ var store = global[SHARED] || (global[SHARED] = {});
   return store[key] || (store[key] = value !== undefined ? value : {});
 })('versions', []).push({
   version: core.version,
-  mode: __webpack_require__(22) ? 'pure' : 'global',
+  mode: __webpack_require__(24) ? 'pure' : 'global',
   copyright: '© 2018 Denis Pushkarev (zloirock.ru)'
 });
 
@@ -14252,8 +14252,8 @@ exports.f = __webpack_require__(13);
 /***/ (function(module, exports, __webpack_require__) {
 
 var global = __webpack_require__(5);
-var core = __webpack_require__(15);
-var LIBRARY = __webpack_require__(22);
+var core = __webpack_require__(16);
+var LIBRARY = __webpack_require__(24);
 var wksExt = __webpack_require__(48);
 var defineProperty = __webpack_require__(10).f;
 module.exports = function (name) {
@@ -16094,7 +16094,7 @@ exports.default = _assign2.default || function (target) {
 /* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = !__webpack_require__(11) && !__webpack_require__(17)(function () {
+module.exports = !__webpack_require__(11) && !__webpack_require__(18)(function () {
   return Object.defineProperty(__webpack_require__(68)('div'), 'a', { get: function () { return 7; } }).a != 7;
 });
 
@@ -16103,7 +16103,7 @@ module.exports = !__webpack_require__(11) && !__webpack_require__(17)(function (
 /* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isObject = __webpack_require__(16);
+var isObject = __webpack_require__(17);
 var document = __webpack_require__(5).document;
 // typeof document.createElement is 'object' in old IE
 var is = isObject(document) && isObject(document.createElement);
@@ -16175,7 +16175,7 @@ module.exports = function (it) {
 
 "use strict";
 
-var LIBRARY = __webpack_require__(22);
+var LIBRARY = __webpack_require__(24);
 var $export = __webpack_require__(38);
 var redefine = __webpack_require__(74);
 var hide = __webpack_require__(9);
@@ -16257,7 +16257,7 @@ module.exports = __webpack_require__(9);
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-var anObject = __webpack_require__(19);
+var anObject = __webpack_require__(21);
 var dPs = __webpack_require__(147);
 var enumBugKeys = __webpack_require__(44);
 var IE_PROTO = __webpack_require__(42)('IE_PROTO');
@@ -16344,7 +16344,7 @@ function required(rule, value, source, errors, options, type) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(79);
-module.exports = __webpack_require__(215);
+module.exports = __webpack_require__(220);
 
 
 /***/ }),
@@ -16368,6 +16368,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_User_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_User_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_CardFrom_vue__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_CardFrom_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_CardFrom_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_CardSet_vue__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_CardSet_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_CardSet_vue__);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -16390,6 +16392,7 @@ Vue.prototype.$axios = __WEBPACK_IMPORTED_MODULE_2_axios___default.a;
 
 
 
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -16408,6 +16411,9 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
     }, {
       path: '/card',
       component: __WEBPACK_IMPORTED_MODULE_7__components_CardFrom_vue___default.a
+    }, {
+      path: '/cardset',
+      component: __WEBPACK_IMPORTED_MODULE_8__components_CardSet_vue___default.a
     }]
   }]
 });
@@ -33593,7 +33599,7 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14), __webpack_require__(82)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15), __webpack_require__(82)(module)))
 
 /***/ }),
 /* 82 */
@@ -47344,7 +47350,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
 
 /***/ }),
 /* 104 */
@@ -47537,7 +47543,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14), __webpack_require__(52)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15), __webpack_require__(52)))
 
 /***/ }),
 /* 105 */
@@ -86094,7 +86100,7 @@ var index = (function () {
 
 /* harmony default export */ __webpack_exports__["default"] = (index);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(14)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(15)))
 
 /***/ }),
 /* 115 */
@@ -91038,7 +91044,7 @@ exports.default = aria.Utils;
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(66);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__util__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__validator___ = __webpack_require__(165);
@@ -91317,7 +91323,7 @@ module.exports = { "default": __webpack_require__(134), __esModule: true };
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(135);
-module.exports = __webpack_require__(15).Object.assign;
+module.exports = __webpack_require__(16).Object.assign;
 
 
 /***/ }),
@@ -91373,15 +91379,15 @@ module.exports = function (it) {
 "use strict";
 
 // 19.1.2.1 Object.assign(target, source, ...)
-var getKeys = __webpack_require__(21);
+var getKeys = __webpack_require__(23);
 var gOPS = __webpack_require__(45);
-var pIE = __webpack_require__(24);
+var pIE = __webpack_require__(26);
 var toObject = __webpack_require__(72);
 var IObject = __webpack_require__(70);
 var $assign = Object.assign;
 
 // should work with symbols and should have deterministic property order (V8 bug)
-module.exports = !$assign || __webpack_require__(17)(function () {
+module.exports = !$assign || __webpack_require__(18)(function () {
   var A = {};
   var B = {};
   // eslint-disable-next-line no-undef
@@ -91530,7 +91536,7 @@ module.exports = function (TO_STRING) {
 "use strict";
 
 var create = __webpack_require__(75);
-var descriptor = __webpack_require__(20);
+var descriptor = __webpack_require__(22);
 var setToStringTag = __webpack_require__(47);
 var IteratorPrototype = {};
 
@@ -91548,8 +91554,8 @@ module.exports = function (Constructor, NAME, next) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var dP = __webpack_require__(10);
-var anObject = __webpack_require__(19);
-var getKeys = __webpack_require__(21);
+var anObject = __webpack_require__(21);
+var getKeys = __webpack_require__(23);
 
 module.exports = __webpack_require__(11) ? Object.defineProperties : function defineProperties(O, Properties) {
   anObject(O);
@@ -91685,7 +91691,7 @@ __webpack_require__(156);
 __webpack_require__(162);
 __webpack_require__(163);
 __webpack_require__(164);
-module.exports = __webpack_require__(15).Symbol;
+module.exports = __webpack_require__(16).Symbol;
 
 
 /***/ }),
@@ -91701,25 +91707,25 @@ var DESCRIPTORS = __webpack_require__(11);
 var $export = __webpack_require__(38);
 var redefine = __webpack_require__(74);
 var META = __webpack_require__(157).KEY;
-var $fails = __webpack_require__(17);
+var $fails = __webpack_require__(18);
 var shared = __webpack_require__(43);
 var setToStringTag = __webpack_require__(47);
-var uid = __webpack_require__(23);
+var uid = __webpack_require__(25);
 var wks = __webpack_require__(13);
 var wksExt = __webpack_require__(48);
 var wksDefine = __webpack_require__(49);
 var enumKeys = __webpack_require__(158);
 var isArray = __webpack_require__(159);
-var anObject = __webpack_require__(19);
-var isObject = __webpack_require__(16);
+var anObject = __webpack_require__(21);
+var isObject = __webpack_require__(17);
 var toIObject = __webpack_require__(12);
 var toPrimitive = __webpack_require__(39);
-var createDesc = __webpack_require__(20);
+var createDesc = __webpack_require__(22);
 var _create = __webpack_require__(75);
 var gOPNExt = __webpack_require__(160);
 var $GOPD = __webpack_require__(161);
 var $DP = __webpack_require__(10);
-var $keys = __webpack_require__(21);
+var $keys = __webpack_require__(23);
 var gOPD = $GOPD.f;
 var dP = $DP.f;
 var gOPN = gOPNExt.f;
@@ -91843,10 +91849,10 @@ if (!USE_NATIVE) {
   $GOPD.f = $getOwnPropertyDescriptor;
   $DP.f = $defineProperty;
   __webpack_require__(76).f = gOPNExt.f = $getOwnPropertyNames;
-  __webpack_require__(24).f = $propertyIsEnumerable;
+  __webpack_require__(26).f = $propertyIsEnumerable;
   __webpack_require__(45).f = $getOwnPropertySymbols;
 
-  if (DESCRIPTORS && !__webpack_require__(22)) {
+  if (DESCRIPTORS && !__webpack_require__(24)) {
     redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
   }
 
@@ -91933,15 +91939,15 @@ setToStringTag(global.JSON, 'JSON', true);
 /* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var META = __webpack_require__(23)('meta');
-var isObject = __webpack_require__(16);
+var META = __webpack_require__(25)('meta');
+var isObject = __webpack_require__(17);
 var has = __webpack_require__(7);
 var setDesc = __webpack_require__(10).f;
 var id = 0;
 var isExtensible = Object.isExtensible || function () {
   return true;
 };
-var FREEZE = !__webpack_require__(17)(function () {
+var FREEZE = !__webpack_require__(18)(function () {
   return isExtensible(Object.preventExtensions({}));
 });
 var setMeta = function (it) {
@@ -91993,9 +91999,9 @@ var meta = module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 // all enumerable object keys, includes symbols
-var getKeys = __webpack_require__(21);
+var getKeys = __webpack_require__(23);
 var gOPS = __webpack_require__(45);
-var pIE = __webpack_require__(24);
+var pIE = __webpack_require__(26);
 module.exports = function (it) {
   var result = getKeys(it);
   var getSymbols = gOPS.f;
@@ -92049,8 +92055,8 @@ module.exports.f = function getOwnPropertyNames(it) {
 /* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var pIE = __webpack_require__(24);
-var createDesc = __webpack_require__(20);
+var pIE = __webpack_require__(26);
+var createDesc = __webpack_require__(22);
 var toIObject = __webpack_require__(12);
 var toPrimitive = __webpack_require__(39);
 var has = __webpack_require__(7);
@@ -92214,7 +92220,7 @@ function whitespace(rule, value, source, errors, options) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__util__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__required__ = __webpack_require__(77);
@@ -92863,7 +92869,7 @@ function date(rule, value, callback, source, options) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rule___ = __webpack_require__(1);
 
@@ -93601,7 +93607,7 @@ if(false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var escape = __webpack_require__(189);
-exports = module.exports = __webpack_require__(18)(false);
+exports = module.exports = __webpack_require__(14)(false);
 // imports
 
 
@@ -94108,7 +94114,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(195)
 }
-var normalizeComponent = __webpack_require__(27)
+var normalizeComponent = __webpack_require__(20)
 /* script */
 var __vue_script__ = __webpack_require__(198)
 /* template */
@@ -94161,7 +94167,7 @@ var content = __webpack_require__(196);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(26)("4b364757", content, false, {});
+var update = __webpack_require__(19)("4b364757", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -94180,7 +94186,7 @@ if(false) {
 /* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(18)(false);
+exports = module.exports = __webpack_require__(14)(false);
 // imports
 
 
@@ -94304,7 +94310,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(201)
 }
-var normalizeComponent = __webpack_require__(27)
+var normalizeComponent = __webpack_require__(20)
 /* script */
 var __vue_script__ = __webpack_require__(203)
 /* template */
@@ -94357,7 +94363,7 @@ var content = __webpack_require__(202);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(26)("2dbc0bd5", content, false, {});
+var update = __webpack_require__(19)("2dbc0bd5", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -94376,7 +94382,7 @@ if(false) {
 /* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(18)(false);
+exports = module.exports = __webpack_require__(14)(false);
 // imports
 
 
@@ -94623,7 +94629,7 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _c("el-menu-item", { attrs: { index: "2" } }, [
+                          _c("el-menu-item", { attrs: { index: "/cardset" } }, [
                             _c("i", { staticClass: "el-icon-document" }),
                             _vm._v(" "),
                             _c(
@@ -94693,7 +94699,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(206)
 }
-var normalizeComponent = __webpack_require__(27)
+var normalizeComponent = __webpack_require__(20)
 /* script */
 var __vue_script__ = __webpack_require__(208)
 /* template */
@@ -94746,7 +94752,7 @@ var content = __webpack_require__(207);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(26)("0ffdf36e", content, false, {});
+var update = __webpack_require__(19)("0ffdf36e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -94765,7 +94771,7 @@ if(false) {
 /* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(18)(false);
+exports = module.exports = __webpack_require__(14)(false);
 // imports
 
 
@@ -95116,7 +95122,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(211)
 }
-var normalizeComponent = __webpack_require__(27)
+var normalizeComponent = __webpack_require__(20)
 /* script */
 var __vue_script__ = __webpack_require__(213)
 /* template */
@@ -95169,7 +95175,7 @@ var content = __webpack_require__(212);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(26)("097b3e85", content, false, {});
+var update = __webpack_require__(19)("097b3e85", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -95188,7 +95194,7 @@ if(false) {
 /* 212 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(18)(false);
+exports = module.exports = __webpack_require__(14)(false);
 // imports
 
 
@@ -95699,6 +95705,1179 @@ if (false) {
 
 /***/ }),
 /* 215 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(216)
+}
+var normalizeComponent = __webpack_require__(20)
+/* script */
+var __vue_script__ = __webpack_require__(218)
+/* template */
+var __vue_template__ = __webpack_require__(219)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-4cf93b6a"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/CardSet.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4cf93b6a", Component.options)
+  } else {
+    hotAPI.reload("data-v-4cf93b6a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 216 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(217);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(19)("055d71f0", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/_css-loader@0.28.11@css-loader/index.js!../../../../node_modules/_vue-loader@13.7.3@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4cf93b6a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/_sass-loader@7.1.0@sass-loader/lib/loader.js!../../../../node_modules/_vue-loader@13.7.3@vue-loader/lib/selector.js?type=styles&index=0!./CardSet.vue", function() {
+     var newContent = require("!!../../../../node_modules/_css-loader@0.28.11@css-loader/index.js!../../../../node_modules/_vue-loader@13.7.3@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4cf93b6a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/_sass-loader@7.1.0@sass-loader/lib/loader.js!../../../../node_modules/_vue-loader@13.7.3@vue-loader/lib/selector.js?type=styles&index=0!./CardSet.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 217 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(14)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.set-title[data-v-4cf93b6a] {\n  font-family: \"PingFang SC\";\n  font-size: 20px;\n}\n.set-name-box[data-v-4cf93b6a] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.class-img[data-v-4cf93b6a] {\n  width: 200px;\n  height: auto;\n}\n.class-img-box[data-v-4cf93b6a] {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.select-class-img[data-v-4cf93b6a] {\n  width: 50%;\n  height: 50%;\n}\n.right-box[data-v-4cf93b6a] {\n  border-left-width: 1px;\n  border-left-style: solid;\n  border-color: rgba(26, 26, 26, 0.1);\n}\n.mycard-img[data-v-4cf93b6a] {\n  width: 150px;\n  max-height: 110px;\n  height: auto;\n}\n.mycard-item[data-v-4cf93b6a] {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  margin: 0 20px;\n  cursor: pointer;\n}\n.mycard-box[data-v-4cf93b6a] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.mycard-title[data-v-4cf93b6a] {\n  margin-top: 5px;\n  font-family: cursive;\n  font-size: 22px;\n  font-weight: bold;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 218 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      page: 1,
+      total: 0,
+      pagetotal: 10,
+      pageSize: 0,
+
+      carditems: [],
+      b_myCard: true,
+      set_id: 0,
+      b_setUpdata: false, //是否为更新模式
+      b_remove: true,
+      class_model_id: 0,
+      class_options: [{
+        value: '10',
+        label: '中立'
+      }, {
+        value: '0',
+        label: '0'
+      }],
+      select_class_value: 0,
+      card_name: "自定义卡组",
+      set_size: 0,
+      select_class_id: 0,
+      class_img: "",
+      b_card_select: false,
+      b_select: false,
+      b_class_select: false,
+      cardData: [],
+      selectData: [],
+      value: '',
+      input: "",
+      code: ''
+    };
+  },
+  mounted: function mounted() {
+    this.getMyCardSet();
+  },
+
+  methods: {
+    selectClass: function selectClass(class_id) {
+      this.class_options[1].value = class_id;
+      this.class_options[1].label = this.getClassName(class_id);
+      this.select_class_value = this.class_options[1].label;
+      this.select_class_id = class_id;
+      this.b_class_select = false;
+      this.b_card_select = true;
+      this.class_img = this.getClassImg(class_id);
+      this.getClassCard(class_id);
+      this.class_model_id = class_id;
+    },
+    getClassImg: function getClassImg(class_id) {
+      var root_path = "/image/";
+      var arr_class = {};
+      arr_class["2"] = "德鲁伊.jpg";
+      arr_class["3"] = "法师.jpg";
+      arr_class["4"] = "圣骑士.jpg";
+      arr_class["5"] = "牧师.jpg";
+      arr_class["6"] = "潜行者.jpg";
+      arr_class["7"] = "萨满.jpg";
+      arr_class["8"] = "术士.jpg";
+      arr_class["9"] = "战士.jpg";
+      arr_class["11"] = "猎人.jpg";
+      return root_path + arr_class[class_id];
+    },
+    getClassName: function getClassName(class_id) {
+      var arr_class = {};
+      arr_class["2"] = "德鲁伊";
+      arr_class["3"] = "法师";
+      arr_class["4"] = "圣骑士";
+      arr_class["5"] = "牧师";
+      arr_class["6"] = "潜行者";
+      arr_class["8"] = "术士";
+      arr_class["9"] = "战士";
+      arr_class["11"] = "猎人";
+      return arr_class[class_id];
+    },
+    backToClass: function backToClass() {
+      var _this = this;
+
+      this.$confirm('是否返回？, 此操作将会丢失未保存数据！', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(function () {
+        _this.b_class_select = true;
+        _this.b_card_select = false;
+        _this.selectData = [];
+        _this.set_size = 0;
+        _this.card_name = '自定义卡组';
+        _this.b_setUpdata = false;
+      }).catch(function () {});
+    },
+    getClassCard: function getClassCard(class_id) {
+      var _this2 = this;
+
+      //ajax获得卡牌信息
+      this.$axios.post('/get/class/card', {
+        class_id: class_id,
+        page: this.page,
+        page_sizes: this.pagetotal
+      }).then(function (respose) {
+        _this2.cardData = respose.data.data;
+        _this2.total = respose.data.total;
+      }).catch(function (error) {
+        _this2.$message.error("出错了！" + error);
+      });
+    },
+    formatterClassName: function formatterClassName(row, column) {
+      return this.getClassName(this.select_class_id);
+    },
+    formatterAttack: function formatterAttack(row, column) {
+      if (row.cardtype != '随从') {
+        return "无";
+      } else {
+        return row.attack;
+      }
+    },
+    formatterHealth: function formatterHealth(row, column) {
+      if (row.cardtype != '随从') {
+        return "无";
+      } else {
+        return row.health;
+      }
+    },
+    handleSizeChange: function handleSizeChange(val) {
+      this.pagetotal = val;
+      this.getClassCard(this.class_model_id);
+    },
+    handleCurrentChange: function handleCurrentChange(val) {
+      this.page = val;
+      this.getClassCard(this.class_model_id);
+    },
+    clickCard: function clickCard(row, column, cell, event) {
+      if (this.set_size >= 30) {
+        this.$message.error("最多30张牌!");
+        return;
+      }
+      if (row.size) {
+        if (row.rarity == "传说") {
+          this.$message.warning("传说牌只能添加一张");
+          return;
+        }
+        if (row.size == 2) {
+          this.$message.warning("同一张牌最多添加两张");
+          return;
+        }
+        row.size = 2;
+        this.selectData.push(row);
+        this.set_size++;
+        this.selectData.pop();
+      } else {
+        row.size = 1;
+        this.selectData.push(row);
+        this.set_size++;
+      }
+    },
+    getIndex: function getIndex(arr_list, row) {
+      for (var i = 0; i < arr_list.length; i++) {
+        if (arr_list[i].name == row.name) return i;
+      }
+      return -1;
+    },
+    removeCard: function removeCard(row, column, cell, event) {
+      if (row.size == 1) {
+        var index = this.getIndex(this.selectData, row);
+        this.selectData.splice(index, 1);
+        this.set_size--;
+      } else if (row.size == 2) {
+        row.size--;
+        this.set_size--;
+      } else {
+        this.$message.error("出现了错误！");
+      }
+      this.selectData.push(row);
+      this.selectData.pop();
+    },
+    serachClass: function serachClass(class_id) {
+      this.class_model_id = class_id;
+      this.getClassCard(class_id);
+    },
+    getCode: function getCode(arr_list) {
+      var code = "";
+      for (var i = 0; i < arr_list.length; i++) {
+        code += arr_list[i].id + ",";
+        if (arr_list[i].size == 2) {
+          code += arr_list[i].id + ",";
+        }
+      }
+      return code;
+    },
+    getIndexId: function getIndexId(arr_list, id) {
+      for (var i = 0; i < arr_list.length; i++) {
+        if (arr_list[i].id == id) return i;
+      }
+      return -1;
+    },
+    getList: function getList(code) {
+      var _this3 = this;
+
+      var id_list = code.split(',');
+      id_list.splice(id_list.length - 1, 1);
+      this.$axios.post('/get/card/arrid', {
+        arr_id: id_list
+      }).then(function (respose) {
+        for (var i = 0; i < id_list.length; i++) {
+          var index = _this3.getIndexId(respose.data, id_list[i]);
+          if (respose.data[index].size) respose.data[index].size = 2;else respose.data[index].size = 1;
+        }
+        _this3.selectData = respose.data;
+      }).catch(function (error) {
+        _this3.$message.error("出错了！请刷新");
+        console.log(error);
+      });
+    },
+    saveSet: function saveSet() {
+      var _this4 = this;
+
+      var code = this.getCode(this.selectData);
+      if (this.b_setUpdata) {
+        //更新模式
+        this.$confirm('是否更新套牌？', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(function () {
+          _this4.$axios.post('/updata/set', {
+            id: _this4.set_id,
+            code: code
+          }).then(function (respose) {
+            _this4.$message.success("更新成功！");
+          }).catch(function (error) {
+            _this4.$message.error("出错了！请刷新");
+          });
+        }).catch(function () {});
+      } else {
+        //保存模式
+        this.$axios.post('/save/cardset', {
+          code: code,
+          class_id: this.select_class_id,
+          name: this.card_name
+        }).then(function (respose) {
+          _this4.$message.success("保存成功！");
+        }).catch(function (error) {
+          _this4.$message.error("出错了！请刷新");
+        });
+      }
+    },
+    getMyCardSet: function getMyCardSet() {
+      var _this5 = this;
+
+      this.$axios.get('/get/user/cardset').then(function (respose) {
+        console.log(respose);
+        _this5.carditems = respose.data;
+        for (var i = 0; i < _this5.carditems.length; i++) {
+          _this5.carditems[i].img = _this5.getClassImg(_this5.carditems[i].class_id);
+        }
+      });
+    },
+    removeSet: function removeSet() {
+      var _this6 = this;
+
+      if (this.b_setUpdata) {
+        //删除
+        this.$confirm('是否删除？', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(function () {
+          _this6.$axios.post('/delete/set', {
+            id: _this6.set_id
+          }).then(function (respose) {
+            _this6.$message.success("删除成功！");
+          }).catch(function (error) {
+            _this6.$message.error("出错了！请刷新");
+          });
+        }).catch(function () {});
+      } else {
+        //清空
+        this.selectData = [];
+        this.card_name = '自定义卡组';
+        this.set_size = 0;
+      }
+    },
+    cilckSet: function cilckSet(id, code, name, class_id) {
+      this.set_id = id;
+      this.b_myCard = false;
+      this.selectData = this.getList(code);
+      this.selectClass(class_id);
+      console.log(code);
+      this.set_size = 30;
+      this.card_name = name;
+      this.b_setUpdata = true; //打开更新模式
+    },
+    addSet: function addSet() {
+      this.b_myCard = false;
+      this.b_class_select = true;
+    }
+  }
+});
+
+/***/ }),
+/* 219 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "transition",
+        { attrs: { name: "el-zoom-in-bottom" } },
+        [
+          _c(
+            "el-row",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.b_card_select,
+                  expression: "b_card_select"
+                }
+              ]
+            },
+            [
+              _c(
+                "el-col",
+                { attrs: { span: 18 } },
+                [
+                  _c(
+                    "el-row",
+                    [
+                      _c("el-col", [
+                        _c(
+                          "div",
+                          [
+                            _c("span", [_vm._v("限定搜索")]),
+                            _vm._v(" "),
+                            _c(
+                              "el-select",
+                              {
+                                attrs: { placeholder: "请选择" },
+                                on: { change: _vm.serachClass },
+                                model: {
+                                  value: _vm.select_class_value,
+                                  callback: function($$v) {
+                                    _vm.select_class_value = $$v
+                                  },
+                                  expression: "select_class_value"
+                                }
+                              },
+                              _vm._l(_vm.class_options, function(item) {
+                                return _c("el-option", {
+                                  key: item.value,
+                                  attrs: {
+                                    label: item.label,
+                                    value: item.value
+                                  }
+                                })
+                              }),
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("el-button", {
+                              attrs: {
+                                type: "danger",
+                                icon: "el-icon-back",
+                                circle: ""
+                              },
+                              on: { click: _vm.backToClass }
+                            }),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("返回上一页")])
+                          ],
+                          1
+                        )
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "card-list-box" },
+                    [
+                      _c(
+                        "el-table",
+                        {
+                          staticStyle: { width: "100%" },
+                          attrs: { data: _vm.cardData },
+                          on: { "row-dblclick": _vm.clickCard }
+                        },
+                        [
+                          _c("el-table-column", {
+                            attrs: { prop: "name", label: "名称", width: "180" }
+                          }),
+                          _vm._v(" "),
+                          _c("el-table-column", {
+                            attrs: { label: "技能" },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function(scope) {
+                                  return [
+                                    _c("div", {
+                                      domProps: {
+                                        innerHTML: _vm._s(scope.row.description)
+                                      }
+                                    })
+                                  ]
+                                }
+                              }
+                            ])
+                          }),
+                          _vm._v(" "),
+                          _c("el-table-column", {
+                            attrs: { prop: "rarity", label: "稀有度" }
+                          }),
+                          _vm._v(" "),
+                          _c("el-table-column", {
+                            attrs: {
+                              prop: "classes[0].name",
+                              width: "120",
+                              formatter: _vm.formatterClassName,
+                              label: "职业名称"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("el-table-column", {
+                            attrs: {
+                              prop: "cost",
+                              width: "80",
+                              align: "center",
+                              sortable: "",
+                              label: "费用"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("el-table-column", {
+                            attrs: {
+                              prop: "attack",
+                              width: "110",
+                              formatter: _vm.formatterAttack,
+                              align: "center",
+                              sortable: "",
+                              label: "攻击力"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("el-table-column", {
+                            attrs: {
+                              prop: "health",
+                              width: "110",
+                              formatter: _vm.formatterHealth,
+                              align: "center",
+                              sortable: "",
+                              label: "生命值"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("el-pagination", {
+                        attrs: {
+                          "current-page": _vm.page,
+                          "page-size": _vm.pagetotal,
+                          "page-count": _vm.pageSize,
+                          "page-sizes": [20, 30, 40, 50],
+                          layout: "total, sizes, prev, pager, next, jumper",
+                          total: _vm.total
+                        },
+                        on: {
+                          "size-change": _vm.handleSizeChange,
+                          "current-change": _vm.handleCurrentChange
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("el-col", { staticClass: "right-box", attrs: { span: 6 } }, [
+                _c("div", { staticClass: "select-card-box" }, [
+                  _c("div", { staticClass: "class-img-box" }, [
+                    _c("img", {
+                      staticClass: "select-class-img",
+                      attrs: { src: _vm.class_img }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "set-name-box" },
+                    [
+                      _c("el-input", {
+                        staticStyle: { width: "50%" },
+                        attrs: {
+                          placeholder: "输入一个帅气的套牌名！",
+                          clearable: "",
+                          maxlength: 20
+                        },
+                        model: {
+                          value: _vm.card_name,
+                          callback: function($$v) {
+                            _vm.card_name = $$v
+                          },
+                          expression: "card_name"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "set-list" },
+                    [
+                      _c(
+                        "el-table",
+                        {
+                          staticStyle: { width: "100%" },
+                          attrs: { data: _vm.selectData, "max-height": 400 },
+                          on: { "row-dblclick": _vm.removeCard }
+                        },
+                        [
+                          _c("el-table-column", {
+                            attrs: { prop: "name", label: "名称" }
+                          }),
+                          _vm._v(" "),
+                          _c("el-table-column", {
+                            attrs: { prop: "size", label: "数量" }
+                          }),
+                          _vm._v(" "),
+                          _c("el-table-column", {
+                            attrs: { prop: "rarity", label: "稀有度" }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "set-config-box" },
+                    [
+                      _c(
+                        "el-row",
+                        { attrs: { type: "flex", justify: "space-around" } },
+                        [
+                          _c("el-button", {
+                            attrs: {
+                              type: "success",
+                              icon: "el-icon-check",
+                              circle: ""
+                            },
+                            on: { click: _vm.saveSet }
+                          }),
+                          _vm._v(" "),
+                          _c("span", [
+                            _vm._v(
+                              "\n\t\t\t\t\t\t\t\t" +
+                                _vm._s(_vm.set_size) +
+                                "/30\n\t\t\t\t\t\t\t"
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("el-button", {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.b_remove,
+                                expression: "b_remove"
+                              }
+                            ],
+                            attrs: {
+                              type: "danger",
+                              icon: "el-icon-delete",
+                              circle: ""
+                            },
+                            on: { click: _vm.removeSet }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        [
+          _c(
+            "transition",
+            { attrs: { name: "el-zoom-in-center" } },
+            [
+              _c(
+                "el-row",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.b_class_select,
+                      expression: "b_class_select"
+                    }
+                  ]
+                },
+                [
+                  _c(
+                    "el-card",
+                    { staticClass: "box-card" },
+                    [
+                      _c(
+                        "el-row",
+                        [
+                          _c("el-col", { attrs: { span: 8 } }, [
+                            _c("div", { staticClass: "class-box" }, [
+                              _c("img", {
+                                staticClass: "class-img",
+                                attrs: { src: "/image/德鲁伊.jpg" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.selectClass(2)
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("el-col", { attrs: { span: 8 } }, [
+                            _c("div", { staticClass: "class-box" }, [
+                              _c("img", {
+                                staticClass: "class-img",
+                                attrs: { src: "/image/法师.jpg" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.selectClass(3)
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("el-col", { attrs: { span: 8 } }, [
+                            _c("div", { staticClass: "class-box" }, [
+                              _c("img", {
+                                staticClass: "class-img",
+                                attrs: { src: "/image/猎人.jpg" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.selectClass(11)
+                                  }
+                                }
+                              })
+                            ])
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "el-row",
+                        [
+                          _c("el-col", { attrs: { span: 8 } }, [
+                            _c("div", { staticClass: "class-box" }, [
+                              _c("img", {
+                                staticClass: "class-img",
+                                attrs: { src: "/image/牧师.jpg" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.selectClass(5)
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("el-col", { attrs: { span: 8 } }, [
+                            _c("div", { staticClass: "class-box" }, [
+                              _c("img", {
+                                staticClass: "class-img",
+                                attrs: { src: "/image/潜行者.jpg" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.selectClass(6)
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("el-col", { attrs: { span: 8 } }, [
+                            _c("div", { staticClass: "class-box" }, [
+                              _c("img", {
+                                staticClass: "class-img",
+                                attrs: { src: "/image/萨满.jpg" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.selectClass(7)
+                                  }
+                                }
+                              })
+                            ])
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "el-row",
+                        [
+                          _c("el-col", { attrs: { span: 8 } }, [
+                            _c("div", { staticClass: "class-box" }, [
+                              _c("img", {
+                                staticClass: "class-img",
+                                attrs: { src: "/image/圣骑士.jpg" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.selectClass(4)
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("el-col", { attrs: { span: 8 } }, [
+                            _c("div", { staticClass: "class-box" }, [
+                              _c("img", {
+                                staticClass: "class-img",
+                                attrs: { src: "/image/术士.jpg" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.selectClass(8)
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("el-col", { attrs: { span: 8 } }, [
+                            _c("div", { staticClass: "class-box" }, [
+                              _c("img", {
+                                staticClass: "class-img",
+                                attrs: { src: "/image/战士.jpg" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.selectClass(9)
+                                  }
+                                }
+                              })
+                            ])
+                          ])
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("transition", { attrs: { name: "el-zoom-in-center" } }, [
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.b_myCard,
+                expression: "b_myCard"
+              }
+            ]
+          },
+          [
+            _c(
+              "div",
+              { staticClass: "mycard-box" },
+              [
+                _vm._l(_vm.carditems, function(item) {
+                  return _c(
+                    "div",
+                    {
+                      staticClass: "mycard-item",
+                      on: {
+                        click: function($event) {
+                          _vm.cilckSet(
+                            item.id,
+                            item.code,
+                            item.name,
+                            item.class_id
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c("img", {
+                        staticClass: "mycard-img",
+                        attrs: { src: item.img }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "mycard-title" }, [
+                        _vm._v(_vm._s(item.name))
+                      ])
+                    ]
+                  )
+                }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  [
+                    _c("el-button", {
+                      attrs: {
+                        type: "primary",
+                        icon: "el-icon-plus",
+                        circle: ""
+                      },
+                      on: { click: _vm.addSet }
+                    })
+                  ],
+                  1
+                )
+              ],
+              2
+            )
+          ]
+        )
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-4cf93b6a", module.exports)
+  }
+}
+
+/***/ }),
+/* 220 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

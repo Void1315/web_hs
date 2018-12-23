@@ -31,9 +31,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/upload/img',"UserController@uploadImg");
     Route::post('/change/info','UserController@changeInfo');
     Route::get('/userImg','UserController@userImg');//获取用户头像地址
+    Route::post('/save/cardset','CardControlle@saveSet');//存套牌
+    Route::post('/delete/set','CardControlle@deleteSet');//删除套牌
+    Route::get('/get/user/cardset','UserController@getCardSet');//获取用户套牌
+    Route::post('/updata/set','UserController@updataCardSet');//更新套牌
+    Route::post('/delete/set','UserController@deleteCardSet');//删除套牌
 });
 
 Route::get('/card','CardControlle@getCardPage');
 Route::get('/card/pageinfo','CardControlle@cardPageInfo');
 Route::get("/class",'CardControlle@getClass');
 Route::any('/serach','CardControlle@serach');
+Route::post('/get/class/card','CardControlle@serachClassCard');//获得某一职业+中立卡牌
+Route::post('/get/card/arrid','CardControlle@serachId');//通过ID搜索

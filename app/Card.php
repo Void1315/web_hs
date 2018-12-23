@@ -8,7 +8,7 @@ class Card extends Model
 {
     //
     protected $table = 'card';
-
+    public $timestamps = false;
     public function races()
     {
         return $this->belongsToMany('App\Race','card_race');

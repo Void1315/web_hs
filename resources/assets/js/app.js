@@ -20,6 +20,7 @@ import Index from './components/Example.vue'
 import Frame from './components/Frame.vue'
 import User from './components/User.vue'
 import CardFrom from './components/CardFrom.vue'
+import CardSet from './components/CardSet.vue'
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -41,6 +42,10 @@ const router = new VueRouter({
         {
           path:'/card',
           component : CardFrom
+        },
+        {
+          path:'/cardset',
+          component : CardSet
         }
     	] 
     }

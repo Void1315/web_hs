@@ -7,15 +7,18 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\User;
 use App\Image;
+use App\CardSet;
 class UserController extends Controller
 {
     //
 	public $userModel;
 	public $imageModel;
+	public $cardSetModel;
 	function __construct()
 	{
 		$this->userModel = new User();
 		$this->imageModel = new Image();
+		$this->cardSetModel = new CardSet();
 	}
 
 	public function userImg()//用户头像
@@ -67,5 +70,30 @@ class UserController extends Controller
 		return $this->imageModel->find(1);
 	}
 
+	public function getCardSet(Request $request)
+	{
+		return $this->cardSetModel->where('user_id',Auth::user()->id)->get();
+	}
+
+
+	public function updataCardSet(Request $request)
+	{
+		$model = $this->cardSetModel->find($request->id);
+		$model->code = $request->code;
+		$model->save();
+		return response()->json([
+	    	'data' => '修改成功!',
+	    	'state' => '200'
+		]);
+	}
+
+	public function deleteCardSet(Request $request)
+	{
+		$this->cardSetModel->find($request->id)->delete();
+		return response()->json([
+	    	'data' => '修改成功!',
+	    	'state' => '200'
+		]); 
+	}
 
 }

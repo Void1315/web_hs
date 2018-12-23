@@ -39,7 +39,7 @@
                     <i class="el-icon-menu"></i>
                     <span slot="title">卡牌大全</span>
                   </el-menu-item>
-                  <el-menu-item index="2">
+                  <el-menu-item index="/cardset">
                     <i class="el-icon-document"></i>
                     <span slot="title">我的套牌</span>
                   </el-menu-item>
