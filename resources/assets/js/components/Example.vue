@@ -16,6 +16,11 @@
 
 <script>
     export default {
+        data: function () {
+          return {
+            count: 0
+          }
+        },
         mounted() {
             console.log('Component mounted.')
         }

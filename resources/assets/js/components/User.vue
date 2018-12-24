@@ -88,9 +88,8 @@ export default {
     			this.userImgPath = response.data[0].image.path
     			this.form.name = response.data[0].name
     			this.form.email = response.data[0].email
-    			// console.log(response.data[0].name)
     		}).catch((error) => {
-    			console.log(1)
+    			console.log(error)
     		})
     	},
     	handleRemove(file, fileList) {

@@ -21,6 +21,7 @@ import Frame from './components/Frame.vue'
 import User from './components/User.vue'
 import CardFrom from './components/CardFrom.vue'
 import CardSet from './components/CardSet.vue'
+import UserManage from './components/UserManage.vue'
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -46,6 +47,10 @@ const router = new VueRouter({
         {
           path:'/cardset',
           component : CardSet
+        },
+        {
+          path:'/usermanage',
+          component : UserManage
         }
     	] 
     }
@@ -57,6 +62,36 @@ if (token) {
     window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 }
 Vue.prototype.$token = token.content;
+Vue.prototype.$auth = false;
+
+
+router.beforeEach(function (to, from, next) {
+    const nextRoute = [ '/', '/user', '/card','/cardset'];
+
+    if (nextRoute.indexOf(to.path) >= 0) {
+        //未登录
+        window.axios.get('/isuser').then((respose) =>{
+          if(getCookie("islogin")=="true"){
+            next();
+          }else{
+            window.location.href = '/loginUser'
+            // router.push('./loginUser')
+          }
+        })
+    }
+    next();
+});
+function getCookie(name) 
+{ 
+    var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+ 
+    if(arr=document.cookie.match(reg))
+ 
+        return unescape(arr[2]); 
+    else 
+        return null; 
+};
+
 const app = new Vue({
     el: '#app',
     router

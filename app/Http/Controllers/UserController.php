@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\User;
 use App\Image;
 use App\CardSet;
@@ -35,7 +36,8 @@ class UserController extends Controller
 
 	public function userInfo()
 	{
-		return Auth::user()->get()->each(function($item, $key){
+		$user = $this->userModel->where('id',Auth::user()->id);
+		return $user->get()->each(function($item, $key){
 			$item =  $item->image;
 		});
 	}
@@ -53,7 +55,7 @@ class UserController extends Controller
 	public function changeInfo(Request $request)//修改个人信息
 	{
 		$this->validate($request, [
-		    'name' => 'bail|required|max:255',
+		    'name' => 'bail|required|max:20',
 		]);
 		$userModel = Auth::user();
 		$userModel->name = $request->name;
@@ -94,6 +96,94 @@ class UserController extends Controller
 	    	'data' => '修改成功!',
 	    	'state' => '200'
 		]); 
+	}
+
+	public function isUser()
+	{
+		if(Auth::check()){
+
+
+			return response()->json([
+				'data' => '认证成功!',
+		    	'state' => '200'
+			]);
+			setcookie("islogin","true");
+		}
+		else{
+			return response('没有认证!', 421);
+			setcookie("islogin","false");
+		}
+	}
+
+	public function signOut()
+	{
+		Auth::logout();
+		return response()->json([
+				'data' => '退出!',
+		    	'state' => '200'
+			]);
+	}
+
+	public function getPermission()
+	{
+		return response()->json([
+			'data'=>Auth::user()->permission,
+			'state' => '200'
+		]);
+	}
+
+
+	public function getUserAll()
+	{
+		return $this->userModel->withTrashed()->get();
+	}
+
+	public function updataUserInfo(Request $request)
+	{
+		$this->validate($request, [
+		    'name' => 'bail|required|max:20',
+		]);
+		$user = $this->userModel->find($request->id);
+		if(Auth::user()->permission > 0){
+			$user->name = $request->name;
+			$user->permission = $request->permission;
+			$user->save();
+			return response()->json([
+				'data'=>'修改成功!',
+				'state' => '200'
+			]);
+		}else{
+			return response('无权限!', 421);
+		}
+		
+	}
+
+	public function deletedUser(Request $request)
+	{
+		$user = $this->userModel->find($request->id);
+		if(Auth::user()->permission > 0&&$request->id!=Auth::user()->id){
+			$user->delete();
+			return response()->json([
+				'data'=>'修改成功!',
+				'state' => '200'
+			]);
+		}else{
+			return response('无权限!', 421);
+		}
+	}
+
+	public function unsealingUser(Request $request)
+	{
+		$user = $this->userModel->withTrashed()->where('id',$request->id);
+		if(Auth::user()->permission > 0&&$request->id!=Auth::user()->id){
+			$user->restore();
+			return response()->json([
+				'data'=>'修改成功!',
+				'state' => '200'
+			]);
+		}else{
+			return response('无权限!', 421);
+		}
 	}
 
 }

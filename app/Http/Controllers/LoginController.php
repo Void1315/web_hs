@@ -27,6 +27,7 @@ class LoginController extends Controller
 		    'password' => 'required|min:6'
 		]);
 		if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+			setcookie("islogin","true");
 			return redirect('/#/');
 		}else
 		{

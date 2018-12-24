@@ -17,7 +17,7 @@
                     </div>
                     <el-dropdown-menu slot="dropdown">
                       <a href="#/user"><el-dropdown-item>个人中心</el-dropdown-item></a>
-                      <el-dropdown-item>退出登录</el-dropdown-item>
+                      <a @click="signOut"><el-dropdown-item>退出登录</el-dropdown-item></a>
                     </el-dropdown-menu>
                   </el-dropdown>
                 </el-row>
@@ -43,9 +43,9 @@
                     <i class="el-icon-document"></i>
                     <span slot="title">我的套牌</span>
                   </el-menu-item>
-                  <el-menu-item index="3">
+                  <el-menu-item v-show="b_userinfo" index="/usermanage">
                     <i class="el-icon-setting"></i>
-                    <span slot="title">关于</span>
+                    <span slot="title">管理员管理</span>
                   </el-menu-item>
                 </el-menu>
               </el-col>
@@ -63,16 +63,28 @@
     export default {
         data() {
           return {
+            b_userinfo: false,
             isCollapse: true,
             userImgPath: "",
           };
         },
         mounted() {
             this.getUserImg();
+            this.getPermission()
         },
         methods: {
           handleOpen(key, keyPath) {
             console.log(key, keyPath);
+          },
+          getPermission(){
+            this.$axios.get('/get/permission').then((response) => {
+              console.log(response)
+              if(response.data.data > 0){
+                this.b_userinfo = true
+              }else{
+                this.b_userinfo = false
+              }
+            })
           },
           handleClose(key, keyPath) {
             console.log(key, keyPath);
@@ -93,6 +105,12 @@
           },
           changImg(imgPath){
             this.userImgPath = imgPath
+          },
+          signOut(){
+            console.log(1111)
+            this.$axios.get('/signout').then((response) => {
+              window.location.href = '/loginUser'
+            })
           }
         }
     }
