@@ -70,14 +70,13 @@ router.beforeEach(function (to, from, next) {
 
     if (nextRoute.indexOf(to.path) >= 0) {
         //未登录
-        window.axios.get('/isuser').then((respose) =>{
-          if(getCookie("islogin")=="true"){
+        console.log()
+        if(getCookie("islogin")=="true"){
             next();
           }else{
             window.location.href = '/loginUser'
             // router.push('./loginUser')
           }
-        })
     }
     next();
 });

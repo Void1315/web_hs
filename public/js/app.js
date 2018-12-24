@@ -16436,14 +16436,13 @@ router.beforeEach(function (to, from, next) {
 
   if (nextRoute.indexOf(to.path) >= 0) {
     //未登录
-    window.axios.get('/isuser').then(function (respose) {
-      if (getCookie("islogin") == "true") {
-        next();
-      } else {
-        window.location.href = '/loginUser';
-        // router.push('./loginUser')
-      }
-    });
+    console.log();
+    if (getCookie("islogin") == "true") {
+      next();
+    } else {
+      window.location.href = '/loginUser';
+      // router.push('./loginUser')
+    }
   }
   next();
 });
@@ -96301,6 +96300,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this4 = this;
 
       var code = this.getCode(this.selectData);
+      if (this.set_size < 30) {
+        this.$notify.error({
+          title: '错误',
+          message: '没有达到30张卡牌！'
+        });
+        return;
+      }
       if (this.b_setUpdata) {
         //更新模式
         this.$confirm('是否更新套牌？', '提示', {

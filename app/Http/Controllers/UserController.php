@@ -144,7 +144,7 @@ class UserController extends Controller
 		    'name' => 'bail|required|max:20',
 		]);
 		$user = $this->userModel->find($request->id);
-		if(Auth::user()->permission > 0){
+		if(Auth::user()->permission > $user->permission){
 			$user->name = $request->name;
 			$user->permission = $request->permission;
 			$user->save();
@@ -161,7 +161,7 @@ class UserController extends Controller
 	public function deletedUser(Request $request)
 	{
 		$user = $this->userModel->find($request->id);
-		if(Auth::user()->permission > 0&&$request->id!=Auth::user()->id){
+		if(Auth::user()->permission > $user->permission&&$request->id!=Auth::user()->id){
 			$user->delete();
 			return response()->json([
 				'data'=>'修改成功!',
@@ -175,7 +175,7 @@ class UserController extends Controller
 	public function unsealingUser(Request $request)
 	{
 		$user = $this->userModel->withTrashed()->where('id',$request->id);
-		if(Auth::user()->permission > 0&&$request->id!=Auth::user()->id){
+		if(Auth::user()->permission > $user->permission&&$request->id!=Auth::user()->id){
 			$user->restore();
 			return response()->json([
 				'data'=>'修改成功!',

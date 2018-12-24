@@ -429,6 +429,13 @@ export default {
     	},
     	saveSet(){
     		let code = this.getCode(this.selectData) 
+    		if(this.set_size<30){
+    			 this.$notify.error({
+			          title: '错误',
+			          message: '没有达到30张卡牌！'
+		         });
+    			return
+    		}
     		if(this.b_setUpdata){//更新模式
     			this.$confirm('是否更新套牌？', '提示', {
 		          confirmButtonText: '确定',
