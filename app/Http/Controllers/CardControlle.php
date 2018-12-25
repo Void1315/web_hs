@@ -69,7 +69,7 @@ class CardControlle extends Controller
 
 	public  function serach(Request $request)
 	{
-		$data = $this->cardModel->where('name','like','%'.$request->serach.'%')->get();
+		$data = $this->cardModel->where('name','like','%'.$request->serach.'%')->orWhere('description','like','%'.$request->serach.'%')->get();
 		$data = $data->each(function($item,$key){
 			$item->classes;
 			$item->races;

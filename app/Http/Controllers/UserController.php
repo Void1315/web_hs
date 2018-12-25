@@ -175,7 +175,7 @@ class UserController extends Controller
 	public function unsealingUser(Request $request)
 	{
 		$user = $this->userModel->withTrashed()->where('id',$request->id);
-		if(Auth::user()->permission > $user->permission&&$request->id!=Auth::user()->id){
+		if(Auth::user()->permission > $user->first()->permission&&$request->id!=Auth::user()->id){
 			$user->restore();
 			return response()->json([
 				'data'=>'修改成功!',
